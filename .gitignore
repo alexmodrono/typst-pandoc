@@ -2,7 +2,7 @@
 output/
 *.pdf
 *.epub
-*.typ
+output/*.typ
 
 # macOS system files
 .DS_Store
