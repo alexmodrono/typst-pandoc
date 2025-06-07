@@ -13,26 +13,11 @@ A repository for building a sample book using Markdown, Pandoc, and Typst. It de
 
 ### Requirements
 
-- Python 3.6 or higher (no additional packages needed)
 - Pandoc and Typst for building the book
 
 ### Quick Setup
 
-The easiest way to get started is to use the initialization script:
-
-```bash
-./init.py
-```
-
-This interactive script will:
-1. Ask for your book's title, authors, and other metadata
-2. Configure all necessary files
-3. Create an initial chapter structure
-4. Set up licensing information
-
-### Manual Setup
-
-If you prefer to set things up manually, you can:
+The easiest way to get started is to:
 1. Edit `metadata.yaml` to set your book's information
 2. Modify the files in `contents/` to add your chapters
 3. Update `bibliography.bib` with your references
