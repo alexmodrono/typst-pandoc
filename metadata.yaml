@@ -84,4 +84,6 @@ rights: "© 2025 Whatever"
 
 # Pandoc uses “author” to build its internal title page.  
 # It will list all names here under the title in the generated EPUB XHTML.
-author: "Authors of Sample Book"
+author:
+  - "Author 1 of Sample Book"
+  - "Author 2 of Sample Book"
