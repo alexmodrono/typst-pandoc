@@ -1,0 +1,87 @@
+#========================================# Copyright or licensing information.  
+# Commonly shown by EPUB readers in Book Info.
+# rights: "© 2025 Author #1 of Sample Book"===================================
+#                            BOOK METADATA
+#==============================================================================
+
+# The main title of the book
+title: "Sample Book"
+
+# An optional subtitle; uncomment and fill in if applicable
+# subtitle: "A Companion to Typst and EPUB Workflows"
+
+# Brief description or blurb for the book
+description: "A sample book demonstrating Typst and EPUB generation"
+
+# Language code (RFC 5646) for the book’s primary language
+lang: "es"
+
+#==============================================================================
+#                            IDENTIFIERS & DATES
+#==============================================================================
+
+# A unique identifier (e.g., ISBN, UUID, or custom slug).  
+# This will be used as the EPUB’s <dc:identifier>.
+identifier: "sample-book-2025"
+
+# Date used by Pandoc for sorting/versioning.  
+# Format: YYYY-MM-DD (ISO 8601).  
+# If you only specify a year, Pandoc will assume “YYYY-01-01”.
+date: "2025-06-21"
+
+# Publication date for booksellers or platforms that read “publication_date”  
+# (not strictly needed by Pandoc, but some workflows rely on it).
+# Use ISO 8601 format to avoid ambiguities.
+publication_date: "2025-06-07"
+
+#==============================================================================
+#                            PUBLISHER & RIGHTS
+#==============================================================================
+
+# Name of the publisher (for self-published works, your name or imprint)
+publisher: "Self Published"
+
+# Copyright or licensing information.  
+# Commonly shown by EPUB readers in “Book Info”.
+rights: "© 2025 Whatever"
+
+# Subject keywords or categories (optional).  
+# EPUB readers may use this to help users discover your book.
+# You can supply a single string or a YAML list of strings.
+# subject:
+#   - "Technical Writing"
+#   - "Markup Languages"
+#   - "eBook Production"
+
+#==============================================================================
+#                              COVER & STYLES
+#==============================================================================
+
+# Path to your cover image file (JPEG or PNG).  
+# Pandoc will embed this as the EPUB cover.  
+# Example: put “assets/cover.jpg” in the same directory as you run pandoc.
+# cover-image: "assets/cover.jpg"
+
+# Custom CSS stylesheet to override Pandoc’s default EPUB styles.  
+# Example: create “styles/epub.css” and adjust typography, margins, etc.
+# css: "styles/epub.css"
+
+#==============================================================================
+#                              BIBLIOGRAPHY / CITATIONS
+#==============================================================================
+
+# Path to your BibTeX (.bib) file if you plan to use Pandoc’s --citeproc.  
+# Pandoc will look here when processing [@citation-key] entries.
+# bibliography: "bibliography.bib"
+
+# CSL (Citation Style Language) file for formatting references.  
+# Example: download “ieee.csl” or “chicago-author-date.csl” and place next to metadata.
+# csl: "ieee.csl"
+
+#==============================================================================
+#                              AUTHORS & CREATORS
+#==============================================================================
+
+# Pandoc uses “author” to build its internal title page.  
+# It will list all names here under the title in the generated EPUB XHTML.
+author: "Authors of Sample Book"

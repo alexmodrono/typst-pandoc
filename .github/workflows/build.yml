@@ -1,0 +1,36 @@
+name: Build Book
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc make
+        # Install Typst
+        curl -L --output typst.tar.xz https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
+        tar -xf typst.tar.xz
+        sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+
+    - name: Build book
+      run: |
+        make clean
+        make
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: book-output
+        path: |
+          output/sample-book.pdf
+          output/sample-book.epub

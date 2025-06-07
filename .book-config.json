@@ -1,0 +1,10 @@
+{
+  "title": "Sample Book",
+  "authors": [
+    "Author #1 of Sample Book"
+  ],
+  "publisher": "Self Published",
+  "date": "2025-06-07",
+  "description": "A sample book demonstrating Typst and EPUB generation",
+  "license": "CC-BY-NC-SA-4.0"
+}
