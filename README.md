@@ -1,11 +1,11 @@
-# Sample Book Project
+# typst-pandoc
 
 A repository for building a sample book using Markdown, Pandoc, and Typst. It demonstrates how to:
 
 * Organize chapters in a `contents/` folder (with numeric prefixes for ordering)
-* Use Pandoc to convert Markdown → Typst → PDF/EPUB
+* Use Pandoc to convert Markdown → Typst → PDF & Markdown → EPUB.
 * Customize the Typst template for advanced page layout, sidebars, drop caps, etc.
-* Manage bibliographic citations (APA style)
+* Manage bibliographic citations
 * Bundle images and custom fonts
 * Automate builds via a `Makefile`
 
@@ -19,7 +19,7 @@ A repository for building a sample book using Markdown, Pandoc, and Typst. It de
 
 The easiest way to get started is to:
 1. Edit `metadata.yaml` to set your book's information
-2. Modify the files in `contents/` to add your chapters
+2. Modify the files in `contents/` to add your content
 3. Update `bibliography.bib` with your references
 4. Build the book using the commands below
 
@@ -60,15 +60,15 @@ This will watch for changes and rebuild automatically.
 
 ## 1. Project Overview
 
-This project illustrates a full “Markdown → Pandoc → Typst → PDF/EPUB” pipeline for authoring a multi‐chapter book. Each chapter lives as a separate Markdown file in `contents/`, prefixed with a three‐digit number (e.g. `001.introduction.md`, `002.background.md`, …). Pandoc collects and concatenates these files in ascending numeric order, applies front‐matter metadata, and emits a single Typst (`.typ`) file. Finally, Typst compiles that `.typ` into a richly‐formatted PDF. Optionally, Pandoc also generates an EPUB from the same Markdown sources.
+This project illustrates a full “Markdown → Pandoc → Typst → PDF/EPUB” pipeline for authoring a multi‐chapter book. Each chapter lives as a separate Markdown file in `contents/`, prefixed with a number (e.g. `001.introduction.md`, `002.background.md`, …). Pandoc collects and concatenates these files in ascending numeric order, applies front‐matter metadata, and emits a single Typst (`.typ`) file. Finally, Typst compiles that `.typ` into a richly‐formatted PDF. Optionally, Pandoc also generates an EPUB from the same Markdown sources.
 
 Key goals:
 
 * **Maintainable chapter ordering** via filename prefixes (`001`, `002`, … `050`).
-* **Reusable Typst template** (`templates/book.typ`) with advanced layout features (drop caps, sidebars, margin notes, custom headers/footers, etc.).
+* **Reusable Typst template** (`templates/layman.typ`) with advanced layout features (drop caps, sidebars, margin notes, custom headers/footers, etc.). Any other template can be easily used. 
 * **Automated build** using a `Makefile`, so you can type `make pdf`, `make epub`, or `make watch` with minimal typing.
-* **Bibliographic citations** pulled from `bibliography.bib` (APA style) and rendered in Typst.
-* **Bundled images** (cover, figures, user/chat icons) under `img/`—Typst can reference these without duplication.
+* **Bibliographic citations** pulled from `bibliography.bib` and rendered in Typst.
+* **Bundled images** (cover, figures, user/chat icons) under `img/` (Typst can reference these without duplication).
 
 ---
 
@@ -79,12 +79,10 @@ Key goals:
 ├── contents/                   # Source chapters (Markdown), named 001.*, 002.*, …
 │   ├── 001.advanced-topics.md
 │   ├── 002.complex-theory.md
-│   └── … (more .md files)
+│   └── ... (more .md files)
 │
 ├── img/                        # Images used by Typst (cover, icons, figures, etc.)
-│   ├── temporary-cover.png
-│   ├── user-icon.png
-│   └── chat-gpt-icon.png
+│   ├── ... your images here.
 │
 ├── output/                     # Build artifacts (PDF, EPUB, Typst source)
 │   ├── sample-book.typ
@@ -92,12 +90,12 @@ Key goals:
 │   └── sample-book.epub
 │
 ├── templates/                  # Typst template and bibliography
-│   ├── book.typ                # Custom Typst template defining page styles
-│   └── bibliography.bib        # BibTeX file for APA citations
+│   ├── layman.typ                # Custom Typst template defining page styles
 │
 ├── build.sh                    # (Optional) Bash script to run Pandoc + Typst
 ├── Makefile                    # Primary build automation (recommended)
 ├── metadata.yaml               # Front‐matter metadata (title/author/lang/publisher/etc.)
+├── bibliography.bib.yaml 	# BibTeX file for citations
 └── README.md                   # (This file) Project description & instructions
 ```
 
@@ -114,7 +112,7 @@ Before building, ensure you have the following installed and in your `PATH`:
 
 If you plan to generate an EPUB, you may also want:
 
-* A CSL style file (e.g. `apa.csl`) or rely on Typst’s built‐in APA.
+* A CSL style file (e.g. `apa.csl`).
 * A modern EPUB reader (to verify results).
 
 ---
@@ -123,7 +121,7 @@ If you plan to generate an EPUB, you may also want:
 
 ### 4.1. Chapter Ordering
 
-* **Filename convention**: Every Markdown chapter under `contents/` is prefixed by a three‐digit numeral (`001.`, `002.`, …).
+* **Filename convention**: Every Markdown chapter under `contents/` is prefixed by a numeral (`001.`, `002.`, ...).
 * **Sorting step** (in the Makefile):
 
   ```makefile
@@ -139,7 +137,7 @@ The `Makefile` defines several phony targets:
 
 * **`make all`** (the default):
 
-  1. Regenerates `output/sample-book.typ` from all Markdown under `contents/`.
+  1. Generates `output/sample-book.typ` from all Markdown under `contents/`.
   2. Compiles that Typst source into `output/sample-book.pdf`.
   3. Generates `output/sample-book.epub` from the same `.md` files.
 
@@ -153,7 +151,7 @@ The `Makefile` defines several phony targets:
 
 * **`make watch`**:
 
-  * Runs `make pdf` once, then watches the `contents/` folder, `metadata.yaml`, and `templates/book.typ` for changes. Whenever any of those change, it re-runs `make pdf`. Useful when editing chapters in real time.
+  * Runs `make pdf` once, then watches the `contents/` folder, `metadata.yaml`, and `templates/layman.typ` for changes. Whenever any of those change, it re-runs `make pdf`. Useful when editing chapters in real time.
 
 * **`make clean`**:
 
@@ -174,7 +172,7 @@ $(OUTPUT_DIR)/$(BOOK_NAME).typ: $(CHAPTERS) metadata.yaml templates/book.typ | $
 	pandoc $(CHAPTERS) \
 		--metadata-file=metadata.yaml \
 		--to=typst \
-		--template=templates/book.typ \
+		--template=templates/layman.typ \
 		--output="$@"
 
 # 3. PDF depends on Typst source:
@@ -194,7 +192,7 @@ $(OUTPUT_DIR)/$(BOOK_NAME).epub: $(CHAPTERS) metadata.yaml | $(OUTPUT_DIR)
 
 ### 4.3. Custom Typst Template
 
-The file `templates/book.typ` is a fully-featured Typst template that defines:
+The file `templates/layman.typ` is a fully-featured Typst template that defines:
 
 * **Document metadata** (`title`, `authors`, `publisher`, `date`, etc.)
 * **Front and back covers**, using `#let front-cover()` and `#let intro-page(...)` macros
@@ -365,14 +363,14 @@ Because we rely on three-digit prefixes (001, 002, …, 050), inserting or split
 1. **Clone the repository**:
 
    ```bash
-   git clone <repo-url>
-   cd <repo-folder>
+   git clone https://github.com/alexmodrono/typst-pandoc
+   cd typst-pandoc
    ```
 
 2. **Inspect or edit metadata**:
 
    * Open `metadata.yaml` and set `title`, `author`, and other fields as desired.
-   * If you want a different license or publisher info, edit the “license text” under `$show: book.with(...)` in `templates/book.typ`.
+   * If you want a different license or publisher info, edit the “license text” under `$show: book.with(...)` in `templates/layman.typ`.
 
 3. **Add or update chapters** in `contents/` (naming them with a three-digit prefix).
 
