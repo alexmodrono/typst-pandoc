@@ -9,6 +9,8 @@ A repository for building a sample book using Markdown, Pandoc, and Typst. It de
 * Bundle images and custom fonts
 * Automate builds via a `Makefile`
 
+[See the example PDF to get a glimpse of what can be achieved with this.](https://github.com/alexmodrono/typst-pandoc/blob/main/.github/sample-book.pdf)
+
 ## Getting Started
 
 ### Requirements
